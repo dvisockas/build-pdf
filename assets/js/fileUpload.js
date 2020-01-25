@@ -1,11 +1,12 @@
 (function () {
+  const submitButton = document.getElementById('submit')
 
-  fileInput.addEventListener('click', build)
+  submitButton.addEventListener('click', build)
 
   function build(event) {
     if (typeof window.FileReader !== 'function')
     throw ("The file API isn't supported on this browser.");
-    const fileInput = document.getElementById('submit')
+    const fileInput = document.getElementById('fileUpload')
     let input = event.target;
     if (!fileInput)
       throw ("The browser does not properly implement the event object");
@@ -13,7 +14,6 @@
       throw ("This browser does not support the `files` property of the file input.");
     if (!fileInput.files[0])
       return undefined;
-
     let file = fileInput.files[0];
     let fileReader = new FileReader();
     fileReader.onload = function(reader) {
@@ -24,7 +24,7 @@
       doc.addImage(reader.currentTarget.result, 'JPEG', 15, 40, 180, 160)
       doc.addPage()
       doc.addImage(reader.currentTarget.result, 'JPEG', 15, 40, 180, 160)
-      // doc.save('manel.pdf')
+      doc.save('manel.pdf')
     }
 
     fileReader.readAsDataURL(file)
